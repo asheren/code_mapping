@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :surveys
 
   root to: "users#new"
   get "/auth/:provider/callback" => "sessions#create"
