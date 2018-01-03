@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180103180417) do
+ActiveRecord::Schema.define(version: 20180103225651) do
+
+  create_table "survey_responses", force: :cascade do |t|
+    t.integer  "perceived_code_confidence"
+    t.integer  "material_difficulty_rating"
+    t.text     "notes"
+    t.datetime "created_at",                 null: false
+    t.datetime "updated_at",                 null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "provider"
