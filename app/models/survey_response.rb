@@ -11,4 +11,7 @@
 #
 
 class SurveyResponse < ApplicationRecord
+  validates_presence_of :perceived_code_confidence
+  validates_presence_of :material_difficulty_rating
+
 end

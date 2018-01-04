@@ -19,7 +19,7 @@ RSpec.describe SurveyResponse, type: :model do
     survey_response.perceived_code_confidence
     survey_response.valid?
     expect(survey_response).to_not be_valid
-    expect(survey_response.errors).to include([""])
+    expect(survey_response.errors.messages.values).to include(["can't be blank"])
 
 
     # create survey response
@@ -27,5 +27,11 @@ RSpec.describe SurveyResponse, type: :model do
     # expect the question won't save to the DB if the validation fails
   end
 
-  it "validates that material difficulty rating is answered"
+  it "validates that material difficulty rating is answered" do
+    survey_response = build(:survey_response)
+    survey_response.material_difficulty_rating
+    survey_response.valid?
+    expect(survey_response).to_not be_valid
+    expect(survey_response.errors.messages.values).to include(["can't be blank"])
+  end
 end
