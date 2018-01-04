@@ -11,7 +11,8 @@
 #
 
 class SurveyResponse < ApplicationRecord
-  validates_presence_of :perceived_code_confidence
-  validates_presence_of :material_difficulty_rating
-
+  validates :perceived_code_confidence, presence: true, inclusion: { in: 1..10,
+    message: "%{value} must be an integer from 1 to 10" }
+  validates :material_difficulty_rating, presence: true, inclusion: { in: 1..10,
+    message: "%{value} must be an integer from 1 to 10" }
 end

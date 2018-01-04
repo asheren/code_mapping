@@ -12,9 +12,12 @@
 
 ActiveRecord::Schema.define(version: 20180103225651) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "survey_responses", force: :cascade do |t|
-    t.integer  "perceived_code_confidence"
-    t.integer  "material_difficulty_rating"
+    t.integer  "perceived_code_confidence",  null: false
+    t.integer  "material_difficulty_rating", null: false
     t.text     "notes"
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
