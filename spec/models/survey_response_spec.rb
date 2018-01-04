@@ -13,18 +13,12 @@
 require "rails_helper"
 
 RSpec.describe SurveyResponse, type: :model do
-  # validation specs for question 1 and question 2
   it "validates that perceived code confidence is answered" do
     survey_response = build(:survey_response)
     survey_response.perceived_code_confidence
     survey_response.valid?
     expect(survey_response).to_not be_valid
     expect(survey_response.errors.messages.values).to include(["can't be blank"])
-
-
-    # create survey response
-    # update it to add question answer
-    # expect the question won't save to the DB if the validation fails
   end
 
   it "validates that material difficulty rating is answered" do
