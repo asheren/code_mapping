@@ -1,10 +1,10 @@
 require "rails_helper"
 
-feature "Submitting a new code confidence survey" do
+feature "Submitting a new code confidence survey", js: true do
   scenario "A user can enter in a number for perceived code confidence" do
     user = create(:user)
     #sign_in user
-    save_and_open_screenshot
+    save_and_open_page
     visit new_survey_response_path
 
     expect(page).to have_content("How confident am I")
