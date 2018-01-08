@@ -2,9 +2,8 @@ require "rails_helper"
 
 feature "Submitting a new code confidence survey", js: true do
   scenario "A user can enter in a number for perceived code confidence" do
-    user = create(:user)
-    #sign_in user
-    save_and_open_page
+    sign_in
+
     visit new_survey_response_path
 
     expect(page).to have_content("How confident am I")
@@ -15,22 +14,22 @@ feature "Submitting a new code confidence survey", js: true do
   end
 
   scenario "A user can enter in a number for material difficulty rating" do
-    user = create(:user)
-    sign_in user
+    sign_in
     visit new_survey_response_path
 
     expect(page).to have_content("How difficult is")
 
     select "2", :from => "material_difficulty_rating"
 
-    expect(page).to have_content("2")
-    # survey_response = user.surveys_responses.last
+    click_button "Submit"
+
+    # survey_response = surveys_responses.last
     # expect(survey_response.material_difficulty_rating).to eq 2
   end
 
   scenario "A user can add notes if they would like" do
     user = create(:user)
-    sign_in user
+    sign_in
     visit new_survey_response_path
 
     expect(page).to have_content("Notes")
