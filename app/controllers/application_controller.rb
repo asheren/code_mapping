@@ -10,7 +10,6 @@ class ApplicationController < ActionController::Base
   end
 
   def authenticate
-    auth = request.env["omniauth.auth"]
-    redirect_to root_path unless auth && User.find_by_provider_and_uid(auth["provider"], auth["uid"])
+    redirect_to root_path unless current_user
   end
 end
