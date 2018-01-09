@@ -23,20 +23,35 @@ feature "Submitting a new code confidence survey", js: true do
 
     click_button "Submit"
 
-    # survey_response = surveys_responses.last
-    # expect(survey_response.material_difficulty_rating).to eq 2
+    survey_response = SurveyResponse.last
+    binding.pry
+    expect(survey_response.material_difficulty_rating).to eq 2
   end
 
   scenario "A user can add notes if they would like" do
-    user = create(:user)
     sign_in
     visit new_survey_response_path
 
     expect(page).to have_content("Notes")
 
-    fill_in :notes, with: "Today my teammates were supportive and positive."
+    fill_in :Notes, with: "Today my teammates were supportive and positive."
 
+    click_button "Submit"
+
+    survey_response = SurveyResponse.last
+    expect(survey_response.notes).to eq("Today my teammates were supportive and positive.")
   end
 
-  scenario "A user can submit the survey"
+  scenario "A user can submit the survey" do
+    sign_in
+    visit new_survey_response_path
+
+    select "5", :from => "perceived_code_confidence"
+    select "2", :from => "material_difficulty_rating"
+    fill_in :Notes, with: "Today my teammates were supportive and positive."
+
+    click_button "Submit"
+
+    expect(page).to have_content("Index")
+  end
 end
