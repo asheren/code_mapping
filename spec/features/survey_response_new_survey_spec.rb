@@ -8,7 +8,7 @@ feature "Submitting a new code confidence survey", js: true do
 
     expect(page).to have_content("How confident am I")
 
-    select "5", :from => "perceived_code_confidence"
+    select "5", :from => "How confident am I"
 
     expect(page).to have_content("5")
   end
@@ -19,7 +19,8 @@ feature "Submitting a new code confidence survey", js: true do
 
     expect(page).to have_content("How difficult is")
 
-    select "2", :from => "material_difficulty_rating"
+    select "5", :from => "How confident am I"
+    select "2", :from => "How difficult is"
 
     click_button "Submit"
 
@@ -33,6 +34,8 @@ feature "Submitting a new code confidence survey", js: true do
 
     expect(page).to have_content("Notes")
 
+    select "5", :from => "How confident am I"
+    select "2", :from => "How difficult is"
     fill_in :Notes, with: "Today my teammates were supportive and positive."
 
     click_button "Submit"
@@ -45,8 +48,8 @@ feature "Submitting a new code confidence survey", js: true do
     sign_in
     visit new_survey_response_path
 
-    select "5", :from => "perceived_code_confidence"
-    select "2", :from => "material_difficulty_rating"
+    select "5", :from => "How confident am I"
+    select "2", :from => "How difficult is"
     fill_in :Notes, with: "Today my teammates were supportive and positive."
 
     click_button "Submit"
