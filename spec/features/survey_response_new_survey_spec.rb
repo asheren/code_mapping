@@ -24,7 +24,6 @@ feature "Submitting a new code confidence survey", js: true do
     click_button "Submit"
 
     survey_response = SurveyResponse.last
-    binding.pry
     expect(survey_response.material_difficulty_rating).to eq 2
   end
 
