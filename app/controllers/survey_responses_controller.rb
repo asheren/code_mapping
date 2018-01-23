@@ -6,6 +6,7 @@ class SurveyResponsesController < ApplicationController
 
   def create
     @survey_response = SurveyResponse.new(survey_response_params)
+    @survey_response.user = current_user
 
     if @survey_response.save
       flash[:success] = "Survey was saved"
