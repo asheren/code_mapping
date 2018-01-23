@@ -56,4 +56,16 @@ feature "Submitting a new code confidence survey", js: true do
 
     expect(page).to have_content("Index")
   end
+
+  scenario "A user can see all of their survey responses" do
+    sign_in
+    survey_response = create(:survey_response, user: User.last)
+    survey_response_2 = create(:survey_response, user: User.last, notes: nil)
+
+    expect(page.first("tr")).to have_content(survey_response.created_at)
+    expect(page.first("tr")).to have_content(survey_response.perceived_code_confidence)
+    expect(page.first("tr")).to have_content(survey_response.material_difficulty_rating)
+    expect(page.first("tr")).to have_content(survey_response.notes)
+    expect(page.last("tr")).to have_content(survey_response.notes) # does this work?
+  end
 end

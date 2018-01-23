@@ -14,14 +14,14 @@ require "rails_helper"
 
 RSpec.describe SurveyResponse, type: :model do
   it "validates that perceived code confidence is answered" do
-    survey_response = build(:survey_response)
+    survey_response = build(:survey_response, perceived_code_confidence: nil)
     survey_response.valid?
     expect(survey_response).to_not be_valid
     expect(survey_response.errors[:perceived_code_confidence]).to include("can't be blank")
   end
 
   it "validates that material difficulty rating is answered" do
-    survey_response = build(:survey_response)
+    survey_response = build(:survey_response, material_difficulty_rating: nil)
     survey_response.valid?
     expect(survey_response).to_not be_valid
     expect(survey_response.errors[:material_difficulty_rating]).to include("can't be blank")

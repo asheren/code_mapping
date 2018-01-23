@@ -12,5 +12,9 @@
 
 FactoryBot.define do
   factory :survey_response do
+    user
+    perceived_code_confidence 6
+    material_difficulty_rating 3
+    notes "this is a note"
   end
 end
