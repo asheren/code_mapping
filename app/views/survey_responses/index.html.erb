@@ -1,1 +1,18 @@
 <h1>Index</h1>
+<table>
+  <tr>
+    <th>Survey Date</th>
+    <th>Confidence Level</th>
+    <th>Difficulty of Material</th>
+    <th>Notes</th>
+  </tr>
+
+<% @survey_responses.each do |survey_response| %>
+  <tr>
+    <td><%= survey_response.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %e, %Y") %></td>
+    <td><%= survey_response.perceived_code_confidence %></td>
+    <td><%= survey_response.material_difficulty_rating %></td>
+    <td><%= survey_response.notes %></td>
+  </tr>
+<% end %>
+</table>
