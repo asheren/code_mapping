@@ -1,5 +1,12 @@
+<h1>Code Mapping</h1>
+<h3> An easy way to track trends and patterns related to your code confidence</h3>
+<br>
 <% if current_user %>
   <%= "Welcome #{current_user.name}" %>
+  <br>
+  <%= link_to "Sign out", signout_path %>
+  <hr>
+  <%= link_to "Fill out your survey for the day", new_survey_response_path %>
 <% else %>
   <%= link_to "Sign in with Github", "/auth/github" %>
 <% end %>
