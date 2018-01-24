@@ -62,10 +62,13 @@ feature "Submitting a new code confidence survey", js: true do
     survey_response = create(:survey_response, user: User.last)
     survey_response_2 = create(:survey_response, user: User.last, notes: nil)
 
-    expect(page.first("tr")).to have_content(survey_response.created_at)
-    expect(page.first("tr")).to have_content(survey_response.perceived_code_confidence)
-    expect(page.first("tr")).to have_content(survey_response.material_difficulty_rating)
-    expect(page.first("tr")).to have_content(survey_response.notes)
-    expect(page.last("tr")).to have_content(survey_response.notes) # does this work?
+    visit survey_responses_path
+    save_and_open_screenshot
+
+    expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %e, %Y"))
+    expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.perceived_code_confidence)
+    expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.material_difficulty_rating)
+    expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.notes)
+    expect(page.last("tr")).to have_content(survey_response.notes)
   end
 end

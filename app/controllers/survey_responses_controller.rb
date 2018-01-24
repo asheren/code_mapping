@@ -17,7 +17,7 @@ class SurveyResponsesController < ApplicationController
   end
 
   def index
-    @survey_responses = SurveyResponse.all
+    @survey_responses = SurveyResponse.all.order(created_at: :desc)
   end
 
   private
