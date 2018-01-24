@@ -71,4 +71,17 @@ feature "Submitting a new code confidence survey", js: true do
     expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.notes)
     expect(page.last("tr")).to have_content(survey_response.notes)
   end
+
+  scenario "A user can delete a survey response" do
+    sign_in
+    survey_response = create(:survey_response, user: User.last)
+    survey_response_2 = create(:survey_response, user: User.last, notes: nil)
+
+    visit survey_responses_path
+    expect(page.first("tr")).to have_link("Delete")
+
+    click_link "Delete"
+
+    expect(SurveyResponse.count).to eq 1
+  end
 end
