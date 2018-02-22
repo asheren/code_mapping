@@ -5,6 +5,7 @@
     <th>Confidence Level</th>
     <th>Difficulty of Material</th>
     <th>Notes</th>
+    <th></th>
   </tr>
 
 <% @survey_responses.each do |survey_response| %>
@@ -13,6 +14,7 @@
     <td><%= survey_response.perceived_code_confidence %></td>
     <td><%= survey_response.material_difficulty_rating %></td>
     <td><%= survey_response.notes %></td>
+    <td><%= link_to "Delete", survey_response_path(survey_response), data: { confirm: "Are you sure?" }, method: :delete %></td>
   </tr>
 <% end %>
 </table>

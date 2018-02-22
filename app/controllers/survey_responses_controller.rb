@@ -20,6 +20,16 @@ class SurveyResponsesController < ApplicationController
     @survey_responses = SurveyResponse.all.order(created_at: :desc)
   end
 
+  def destroy
+    @survey_response = SurveyResponse.find(params[:id])
+    if @survey_response.destroy
+      flash[:success] = "Survey was deleted"
+      redirect_to survey_responses_path
+    else
+      render :index
+    end
+  end
+
   private
 
   def survey_response_params
