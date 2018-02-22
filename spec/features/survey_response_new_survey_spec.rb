@@ -61,9 +61,7 @@ feature "Submitting a new code confidence survey", js: true do
     sign_in
     survey_response = create(:survey_response, user: User.last)
     survey_response_2 = create(:survey_response, user: User.last, notes: nil)
-    #puts SurveyResponse.all.order(created_at: :desc).inspect
-    # Option 1: logging actual SQL query to the DB for ^^ to see if there are differences
-    #Option 2: turn off all db truncation and see if that fixes it
+
     visit survey_responses_path
     save_and_open_screenshot
 

@@ -8,8 +8,6 @@
     <th></th>
   </tr>
 
-<% puts @survey_responses.inspect %>
-
 <% @survey_responses.each do |survey_response| %>
   <tr>
     <td><%= survey_response.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %e, %Y") %></td>
