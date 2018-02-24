@@ -63,14 +63,12 @@ feature "Submitting a new code confidence survey", js: true do
     survey_response_2 = create(:survey_response, user: User.last, notes: nil)
 
     visit survey_responses_path
-    save_and_open_screenshot
 
-
-    expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %e, %Y"))
-    expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.perceived_code_confidence)
-    expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.material_difficulty_rating)
-    expect(page.first("tr:nth-of-type(2)")).to have_content(survey_response.notes)
-    expect(page.last("tr")).to_not have_content(survey_response.notes)
+    expect(page.find("tr:nth-of-type(2)")).to have_content(survey_response.created_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %e, %Y"))
+    expect(page.find("tr:nth-of-type(2)")).to have_content(survey_response.perceived_code_confidence)
+    expect(page.find("tr:nth-of-type(2)")).to have_content(survey_response.material_difficulty_rating)
+    expect(page.find("tr:nth-of-type(3)")).to have_content(survey_response.notes)
+    expect(page.find("tr:nth-of-type(2)")).to_not have_content(survey_response.notes)
   end
 
   scenario "A user can delete a survey response" do
@@ -79,9 +77,11 @@ feature "Submitting a new code confidence survey", js: true do
     survey_response_2 = create(:survey_response, user: User.last, notes: nil)
 
     visit survey_responses_path
-    expect(page.first("tr")).to have_link("Delete")
+    #expect(page).to have_link("Delete")
+    save_and_open_screenshot
 
-    click_link "Delete"
+    first("td").click_link "Delete"
+    binding.pry
 
     expect(SurveyResponse.count).to eq 1
   end
