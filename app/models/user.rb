@@ -1,4 +1,18 @@
+# == Schema Information
+#
+# Table name: users
+#
+#  id         :integer          not null, primary key
+#  provider   :string
+#  uid        :string
+#  name       :string
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#
+
 class User < ApplicationRecord
+  has_many :survey_responses
+
   def self.create_with_omniauth(auth)
     create! do |user|
       user.provider = auth["provider"]
